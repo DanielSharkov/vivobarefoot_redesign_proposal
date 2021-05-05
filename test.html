@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+	<title>Document</title>
+	<link rel="stylesheet" href="./styles.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+	<div id="app" :class="[
+		'theme-light',
+		{'layout-boundaries': boundaries},
+	]">
+		<header class="grid">
+			<button class="logo" onclick="location.href='https://vivobarefoot.de'">
+				<!-- <img src="./vivobarefoot_logo2.svg"> -->
+				<svg id="logo" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 300 300" fill="none">
+					<path class="logo-fill" d="M94.7 130.6c-.8 0-1.6-.2-2.1-.5L72 118.3c-1-.6-2.1-2.5-2.1-3.7V91c0-1.3 1-3.1 2.2-3.7l20.4-11.8c1-.6 3.3-.6 4.3 0l20.4 11.8c1 .6 2.1 2.4 2.1 3.7v23.6c0 1.2-1 3-2.1 3.7l-20.4 11.8c-.5.3-1.3.5-2.2.5zm27.5 47.5c-.8 0-1.6-.1-2.2-.4l-20.4-11.8c-1-.6-2.1-2.5-2.1-3.7v-23.6c0-1.3 1-3.1 2.1-3.8l20.4-11.7c.2-.2 1-.5 2.2-.5 1.2 0 2 .3 2.1.5l20.5 11.7c1 .7 2.1 2.5 2.1 3.8v23.6c0 1.2-1 3-2.1 3.7l-20.5 11.8c-.5.3-1.3.4-2.1.4zm52.2 31.6c0 1.3-1 3.1-2.2 3.8l-20.4 11.8c-.2 0-1 .4-2.1.4-1.3 0-2-.3-2.2-.4L127 213.5c-1.1-.7-2.2-2.5-2.2-3.8v-23.5c0-1.3 1.1-3.2 2.2-3.8l20.4-11.8c.2 0 1-.4 2.2-.4.8 0 1.6.1 2.1.4l20.4 11.8c1.1.6 2.2 2.5 2.2 3.7v23.6zm27.4-47.5c0 1.2-1 3-2.1 3.7l-20.4 11.8c-.2 0-1 .4-2.2.4-1.2 0-2-.3-2.1-.4l-20.4-11.8c-1.1-.6-2.2-2.5-2.2-3.7v-23.6c0-1.3 1-3.1 2.2-3.8l20.4-11.7c.5-.3 1.3-.5 2.1-.5 1.3 0 2 .3 2.2.5l20.4 11.7c1 .7 2.1 2.5 2.1 3.8v23.6zm27.5-47.6c0 1.2-1 3-2.1 3.7l-20.4 11.8c-.2.1-1 .5-2.2.5-1.2 0-2-.4-2.2-.5L182 118.3c-1-.6-2.1-2.5-2.1-3.7V91c0-1.3 1-3.1 2.1-3.7l20.5-11.8c.5-.3 1.3-.5 2.1-.5 1.2 0 2 .4 2.2.5l20.4 11.8c1 .6 2.1 2.4 2.1 3.7v23.6z"/>
+				</svg>
+			</button>
+			<nav class="grid">
+				<div class="dropdown-container">
+					<button onclick="location.href='/men'">
+						Männer
+					</button>
+					<div class="dropdown">
+						<div v-for="item in 4" :key="item" class="category">
+							<div
+								class="image"
+								:style="`background-image: url(${testImage})`">
+							</div>
+							<span class="label">Label {{ item }}</span>
+						</div>
+					</div>
+				</div>
+				<div class="dropdown-container">
+					<button onclick="location.href='/ladies'">
+						Damen
+					</button>
+					<div class="dropdown">
+						<div v-for="item in 15" :key="item" class="category">
+							<div
+								class="image"
+								:style="`background-image: url(${testImage2})`">
+							</div>
+							<span class="label">Label {{ item }}</span>
+						</div>
+					</div>
+				</div>
+				<div class="dropdown-container">
+					<button onclick="location.href='/new-arrival'">
+						Neuheiten
+					</button>
+				</div>
+				<div class="dropdown-container">
+					<button onclick="location.href='/sale-oxid'">
+						Angebote
+					</button>
+				</div>
+				<div class="dropdown-container">
+					<button>Barfußwelt</button>
+					<div class="dropdown">
+						<div v-for="item in 7" :key="item" class="category">
+							<div
+								class="image"
+								:style="`background-image: url(${testImage3})`">
+							</div>
+							<span class="label">Label {{ item }}</span>
+						</div>
+					</div>
+				</div>
+				<div class="dropdown-container">
+					<button onclick="location.href='/stores'">
+						Geschäfte
+					</button>
+					<div class="dropdown">
+						<div v-for="item in 11" :key="item" class="category">
+							<div
+								class="image"
+								:style="`background-image: url(${testImage4})`">
+							</div>
+							<span class="label">Label {{ item }}</span>
+						</div>
+					</div>
+				</div>
+			</nav>
+			<div class="grid options">
+				<div class="dropdown-container">
+					<button>
+						<i class="icon material-icons">search</i>
+					</button>
+				</div>
+				<div class="dropdown-container">
+						<button @click="toggleLanguageSelection()">
+							<img class="lang-flag" src="./assets/german_lang.svg"/>
+							<i class="icon material-icons">keyboard_arrow_down</i>
+						</button>
+						<div class="dropdown lang-dropdown" :open="languageSelection">
+							<div class="option">
+								<img
+									class="lang-flag"
+									src="./assets/english_lang.svg"
+								/>
+								<span>English</span>
+							</div>
+							<div class="option">
+								<img
+									class="lang-flag"
+									src="./assets/russian_lang.svg"
+								/>
+								<span>Русский</span>
+							</div>
+							<div class="option">
+								<img
+									class="lang-flag"
+									src="./assets/china_lang.svg"
+								/>
+								<span>中国</span>
+							</div>
+						</div>
+					</div>
+				<div class="dropdown-container">
+					<button @click="toggleUserDropdown()">
+						<i class="icon material-icons">person</i>
+					</button>
+					<div class="dropdown user-dropdown" :open="userDropdown">
+						<div class="grid" v-if="!userSignin">
+							<div class="input-container">
+								<i class="icon material-icons">person</i>
+								<input
+									type="text"
+									placeholder="Benutzername"
+								/>
+							</div>
+							<div class="input-container">
+								<i class="icon material-icons">vpn_key</i>
+								<input
+									type="password"
+									placeholder="Passwort"
+								/>
+							</div>
+							<div class="options">
+								<button class="highlight" @click="toggleUserSession()">
+									Anmelden
+								</button>
+								<button>Registrieren</button>
+							</div>
+						</div>
+						<div class="grid user-profile" v-if="userSignin">
+							<div class="grid">
+								<div
+									class="image"
+									:style="`background-image: url(${sessionUser.image})`">
+								</div>
+								<div class="grid user-data">
+									<span class="name">{{ sessionUser.name }}</span>
+									<span class="email">{{ sessionUser.email }}</span>
+								</div>
+							</div>
+							<button>
+								<i class="icon material-icons">person</i>
+								<span>Profil</span>
+							</button>
+							<button>
+								<i class="icon material-icons">settings</i>
+								<span>Einstellungen</span>
+							</button>
+							<button @click="toggleUserSession()">
+								<i class="icon material-icons">lock</i>
+								<span>Abmelden</span>
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="dropdown-container">
+					<button @click="toggleBasketDropdown()">
+						<i class="icon material-icons">shopping_cart</i>
+					</button>
+					<div class="dropdown basket-dropdown" :open="basketDropdown">
+						<button @click="toggleBoundaries()">
+							Boundaries
+						</button>
+					</div>
+				</div>
+			</div>
+		</header>
+		<article>
+			<section id="banner">
+				<div
+					id="banner-image"
+					:style="`background-image: url(${bannerImage})`">
+				</div>
+				<div id="banner-info">
+					<h1 id="banner-title">Ich bin ein titel</h1>
+					<button id="banner-button">
+						<span>Erkunden</span>
+						<i class="icon material-icons">keyboard_arrow_right</i>
+					</button>
+				</div>
+			</section>
+			<section id="magazin">
+				<span>
+					Entdecke jetzt unser brandneues Magazin mit allen aktuellen Blogbeiträgen.
+				</span>
+			</section>
+			<section id="product-slider" class="grid">
+				<div v-for="(product, index) in products" :key="index" class="product">
+					<img class="image" :src="product.image">
+					<h6 class="name">{{ product.name }}</h6>
+					<span v-if="product.oldPrice" class="old-price">
+						{{ product.oldPrice }} €
+					</span>
+					<span v-if="product.newPrice" class="new-price">
+						{{ product.newPrice }} €
+					</span>
+				</div>
+			</section>
+			<section id="testo" class="grid">
+				<div class="grid half">
+					<img :src="`${imgLoc}/img/cms/viv_start_boxen_stores.jpg`">
+					<div class="label">
+						<span>Unsere Konzept Geschäfte</span>
+						<i class="icon material-icons">
+							keyboard_arrow_right
+						</i>
+					</div>
+				</div>
+				<div class="grid half">
+					<img :src="`${imgLoc}/img/cms/viv_start_boxen_video.jpg`">
+					<div class="label">
+						<span>Video ansehen</span>
+						<i class="icon material-icons">
+							keyboard_arrow_right
+						</i>
+					</div>
+				</div>
+				<div class="grid single">
+					<video class="feet-loop" autoplay loop muted>
+						<source
+							:src="`${imgLoc}/src/vid/viv_start_loop.mp4?audio=0&amp;background=1&amp;autoplay=1`"
+							type="video/mp4"
+						/>
+					</video>
+					<div class="label">
+						<span>Modelle Anzeigen</span>
+						<i class="icon material-icons">
+							keyboard_arrow_right
+						</i>
+					</div>
+				</div>
+				<div class="grid third">
+					<img :src="`${imgLoc}/img/cms/viv_start_boxen_entdecken.jpg`">
+					<div class="label">
+						<span>Warum Vivobarefoot?</span>
+						<i class="icon material-icons">
+							keyboard_arrow_right
+						</i>
+					</div>
+				</div>
+				<div class="grid third">
+					<img :src="`${imgLoc}/img/cms/viv_start_boxen_friends.jpg`">
+					<div class="label">
+						<span>Freunde Werben</span>
+						<i class="icon material-icons">
+							keyboard_arrow_right
+						</i>
+					</div>
+				</div>
+				<div class="grid third">
+					<img :src="`${imgLoc}/img/cms/viv_start_boxen_laufkurs6.jpg`">
+					<div class="label">
+						<span>Kurs Buchen</span>
+						<i class="icon material-icons">
+							keyboard_arrow_right
+						</i>
+					</div>
+				</div>
+			</section>
+			<section class="grid" id="reasons">
+				<div v-for="(reason, index) in reasons" :key="index" class="grid container">
+					<img
+						:src="imgLoc + reason.image"
+						:alt="reason.title"
+					/>
+					<h5>{{ reason.title }}</h5>
+					<p>{{ reason.text }}</p>
+				</div>
+			</section>
+			<section id="about-textures">
+				<div v-for="texture in textures" :key="texture.name">
+					<img :src="imgLoc + texture.image" :alt="texture.name"/>
+					<h6 class="name">
+						{{ texture.name }}	
+					</h6>
+				</div>
+			</section>
+		</article>
+		<footer>
+			<div class="header">
+				<!-- <img
+					id="logo"
+					src="./vivobarefoot_logo.svg"
+					alt=""
+				/> -->
+				<svg id="logo" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 842 188">
+					<path fill="#9f1f2e" d="M26 57c-1 0-1.8-.1-2.3-.4l-21-12.1a5.3 5.3 0 0 1-2.2-3.9V16.4c0-1.3 1.1-3.2 2.3-3.8L23.8.5c1-.6 3.3-.6 4.3 0l21 12c1.1.7 2.2 2.6 2.2 4v24.1c0 1.3-1 3.2-2.2 3.9l-21 12c-.5.4-1.3.5-2.2.5zM54 106c-.8 0-1.7-.2-2.2-.5L31 93.3a5.3 5.3 0 0 1-2.2-3.8V65.3c0-1.3 1.1-3.2 2.2-3.9l21-12c.2-.2 1-.6 2.2-.6 1.3 0 2 .4 2.2.5l21 12.1c1.1.7 2.2 2.6 2.2 3.9v24.2c0 1.3-1 3.2-2.2 3.8l-21 12.1c-.5.3-1.3.5-2.2.5zm53.6 32.4c0 1.3-1.1 3.2-2.2 3.9l-21 12c-.2.2-1 .5-2.2.5-1.3 0-2-.3-2.2-.4l-21-12.1a5.3 5.3 0 0 1-2.2-3.9v-24.2c0-1.3 1.1-3.2 2.2-3.8l21-12.1c.2-.1 1-.5 2.2-.5.9 0 1.7.2 2.2.5l21 12c1.1.7 2.2 2.6 2.2 4v24.1zm28.2-48.8c0 1.3-1 3.2-2.2 3.8l-21 12.1c-.2.1-.9.5-2.2.5-1.3 0-2-.4-2.2-.5l-21-12a5.3 5.3 0 0 1-2.2-4V65.4c0-1.3 1.1-3.2 2.3-3.9l21-12c.4-.4 1.3-.6 2.1-.6 1.3 0 2 .4 2.2.5l21 12.1c1.1.7 2.2 2.6 2.2 3.9v24.2zm28.2-48.9c0 1.3-1 3.2-2.2 3.9l-21 12c-.2.2-.9.5-2.2.5-1.2 0-2-.3-2.2-.4l-21-12.1a5.3 5.3 0 0 1-2.2-3.9V16.4c0-1.3 1.1-3.2 2.3-3.8l21-12.1c.4-.3 1.3-.5 2.1-.5 1.3 0 2 .4 2.2.5l21 12c1.1.7 2.2 2.6 2.2 4v24.1zM442.1 80.1c4.6-2.7 7.1-7 7.1-12.5 0-3.5-1.3-6.7-3.7-9.1-3.3-3.2-8.4-5-14.6-5h-23v55.2h24.2c12.2 0 20-6.1 20-15.7 0-6-3.4-10.4-10-12.9zm-10 22.7h-18v-19H431c5.6 0 15 1.2 15 9.3 0 6-5.3 9.7-13.7 9.7zM430.6 78H414V59.4h16.7c7.6 0 12.1 3.2 12.1 8.8 0 6-4.7 9.7-12.4 9.7zM488.6 53.1h-5.2l-25.7 55.6h6.5l6.8-14.8h29.8l6.7 14.8h6.8L488.6 53zm9.5 35h-24.4l12.2-26.8L498.1 88zM548 85.8c9.2-2 14.7-7.8 14.7-16.1 0-4-1.6-8-4.4-10.7a21.9 21.9 0 0 0-15.7-5.5h-18.8v55.2h6.2v-22h11l17 22h7.8l-17.7-23zm-18-26.4h12.4c8.8 0 14 3.9 14 10.6 0 6.6-5.6 11-14.2 11H530V59.3zM584.2 102.8v-19H610V78h-25.8V59.4h29.2v-6H578v55.3h35.8v-5.9h-29.6zM665.4 59.4v-6h-35v55.3h6.1V83.8H662V78h-25.4V59.4h28.9zM701.5 52.6c-17.5 0-27.9 14.5-27.9 28.6a27.4 27.4 0 0 0 27.7 28.4c17.4 0 27.9-14.5 27.9-28.7 0-16.1-12-28.3-27.7-28.3zm0 51.2c-12.1 0-21.5-10-21.5-22.9 0-12.8 9.1-22.5 21.3-22.5 12 0 21.5 10 21.5 22.8 0 12.9-9.2 22.6-21.3 22.6zM767.9 52.6C750.5 52.6 740 67 740 81.2a27.4 27.4 0 0 0 27.6 28.4c17.5 0 27.9-14.5 27.9-28.7a27.4 27.4 0 0 0-27.7-28.3zm0 51.2c-12 0-21.5-10-21.5-22.9 0-12.8 9.2-22.5 21.3-22.5 12 0 21.5 10 21.5 22.8 0 12.9-9.2 22.6-21.3 22.6zM802.8 53.5v5.9H819v49.3h6.2V59.4h16.2v-6h-38.6zM278.2 53.5h13.4L306 92.4l14.4-38.9h13l-22.2 55.6h-10.7l-22.3-55.6zM186.8 53.5h13.4l14.4 38.9L229 53.5h13.1l-22.3 55.6h-10.7l-22.3-55.6zM254 53.5h12.2v55.2h-12.1V53.5zM337 81.2v-.1a28.5 28.5 0 0 1 29.4-28.5c17 0 29.2 12.7 29.2 28.3v.2a28.5 28.5 0 0 1-29.4 28.5c-17 0-29.2-12.7-29.2-28.4zm46 0v-.1c0-9.5-7-17.3-16.8-17.3-9.7 0-16.5 7.7-16.5 17.1v.2c0 9.4 7 17.3 16.7 17.3s16.5-7.7 16.5-17.2z"/>
+				</svg>
+				<div id="social">
+					<button
+						v-for="social in socialLinks"
+						:key=""
+						:id="social.id"
+						:style="`background-image: url(${social.logo})`">
+					</button>
+				</div>
+			</div>
+			<div id="pay-methods">
+				<h5 class="title">
+					Zahlungsmethoden
+				</h5>
+				<div v-for="meth in payMethods" :key="meth.id" class="method" :id="meth.id">
+					<img :src="meth.logo" :alt="meth.id"/>
+				</div>
+			</div>
+			<div id="contact">
+				<h5 class="title">
+					Kontakt
+				</h5>
+				<h6 id="company">Vivobarefoot</h6>
+				<span id="location">Bötzinger Straße 31</span>
+				<span id="zip-city">79111 Freiburg</span>
+				<span id="openings">Mo - Fr | 9:00 - 17:00 Uhr</span>
+				<a href="#" id="phone">+49 761 4589 2930</a>
+				<a href="#" id="email">sales@vivobarefoot.de</a>
+			</div>
+			<div id="service">
+				<h5 class="title">
+					Kundenservice
+				</h5>
+				<a href="">Mein Konto</a>
+				<a href="">Versand und Zahlung</a>
+				<a href="">Rücksendung</a>
+				<a href="">Kontakt</a>
+				<a href="">FAQ</a>
+			</div>
+			<div id="about-vivobarefoot">
+				<h5 class="title">
+					Vivobarefoot
+				</h5>
+				<a href="">Geschichte</a>
+				<a href="">Geschäfte</a>
+				<a href="">Sohlen</a>
+				<a href="">Verlinke uns!</a>
+				<a href="">Magazin</a>
+				<a href="">Presse</a>
+				<a href="">Karriere</a>
+				<a href="">Händler werden</a>
+				<a href="">Affiliateprogramm</a>
+			</div>
+			<div id="newsletter">
+				<h5 class="title">
+					Newsletter
+				</h5>
+				<span>Melde dich jetzt an und erhalte deinen 5€ Gutschein!</span>
+				<input type="text" placeholder="Email"/>
+				<button>Anmelden</button>
+			</div>
+			<div id="more-info">
+				<div id="certificate-badge">
+					<img src="./assets/certificate.PNG">
+				</div>
+				<div class="grid texts">
+					<div>
+						<span>Kostenlose Lieferung</span>
+						<span class="flag">1</span>
+					</div>
+					<div>
+						<span>Kostenfreie Rücksendung</span>
+						<span class="flag">2</span>
+					</div>
+					<span>30 Tage Wiederrufsrecht</span>
+					<div>
+						<span class="flag">1</span>
+						<span>Nach Deutschland</span>
+					</div>
+					<div>
+						<span class="flag">2</span>
+						<span>Für Kunden aus Deutschland ab einem Warenwert von 40€</span>
+					</div>
+					<span>* Alle Preise inkl. Mwst., Zzgl. Versandkosten.</span>
+				</div>
+			</div>
+			<div class="grid footer">
+				<div class="grid links">
+					<a href="">Datenschutz</a>
+					<a href="">AGB</a>
+					<a href="">Impressum</a>
+					<a href="">Wiederrufsbelehrung</a>
+				</div>
+				<span id="copyright">© 2018 VIVOBAREFOOT</span>
+			</div>
+		</footer>
+	</div>
+</body>
+<script>
+	let app = new Vue({
+		el: '#app',
+		data: {
+			imgLoc: 'https://www.vivobarefoot.de/out/eodresponsive/10',
+			bannerImage: 'https://www.vivobarefoot.de/out/pictures/promo/rotationsbanner_gobihi.jpg',
+			testImage: 'https://c.pxhere.com/photos/82/80/dew_pine_needle_tree_water-22870.jpg!d',
+			testImage2: 'https://images.unsplash.com/photo-1531150282924-fb334f20114a?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=697c52d0f5ed6d6b18d8a9bc4c5fbf28&w=1000&q=80',
+			testImage3: 'https://i.pinimg.com/originals/eb/28/42/eb284246bc63a94380064611b00190b3.jpg',
+			testImage4: 'https://images.pexels.com/photos/1451653/pexels-photo-1451653.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
+			basketDropdown: false,
+			userDropdown: false,
+			userSignin: false,
+			languageSelection: false,
+			sessionUser: {
+				image: 'https://pbs.twimg.com/profile_images/1005857602016772096/eBQhrXny_400x400.jpg',
+				name: 'Daniel Sharkov',
+				email: 'scharktv@gmai.com',
+			},
+			socialLinks: [
+				{
+					// logo: 'https://upload.wikimedia.org/wikipedia/commons/c/c2/F_icon.svg',
+					logo: './assets/facebook.svg',
+					id: 'facebook',
+				},
+				{
+					// logo: 'https://upload.wikimedia.org/wikipedia/de/9/9f/Twitter_bird_logo_2012.svg',
+					logo: './assets/twitter.svg',
+					id: 'twitter',
+				},
+				{
+					// logo: 'https://cdn.vectorlogosupply.com/logos/large/2x/instagram-2016-svg-vector-logo.svg',
+					logo: './assets/instagram.svg',
+					id: 'instagram',
+				},
+				{
+					// logo: 'https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg',
+					logo: './assets/youtube.svg',
+					id: 'youtube',
+				},
+			],
+			payMethods: [
+				{
+					logo: 'https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg',
+					id: 'paypal',
+				},
+				{
+					logo: 'https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg',
+					id: 'visa',
+				},
+				{
+					logo: 'https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg',
+					id: 'mastercard',
+				},
+				{
+					logo: 'https://upload.wikimedia.org/wikipedia/commons/2/29/Amazon_Pay_logo.svg',
+					id: 'amazonpay',
+				},
+				{
+					logo: 'https://www.kosmetik-2go.de/wp-content/uploads/2018/01/vorkasse.svg',
+					id: 'vorauskasse',
+				},
+				{
+					logo: 'https://upload.wikimedia.org/wikipedia/commons/f/fb/Sofort%C3%BCberweisung_Logo.svg',
+					id: 'sofortueberweisung',
+				},
+				{
+					logo: 'https://www.graceflowerbox.de/media/image/25/98/bd/sepa-logo-neu.png',
+					id: 'nachnahme',
+				},
+				{
+					logo: 'https://www.ideal.nl/cms/themes/ideal_nl/img/ideal_logo_header.svg',
+					id: 'ideal',
+				},
+				{
+					logo: 'https://cdn.worldvectorlogo.com/logos/carte-bleue.svg',
+					id: 'debitkarte',
+				},
+			],
+			reasons: [
+				{
+					image: `/src/bg/viv_start_weforgot.png`,
+					title: `We've forgotten how to run - relearn natural movement`,
+					text: `You're body has all the technology you need; muscles and tendons provide natural shock absorption, the skeletal system provides natural motion control and the nervous system provides natural sensory feedback. Our shoes let your feet do their thing.`,
+				},
+				{
+					image: `/src/bg/viv_start_healthy.png`,
+					title: `Healthy and comfortable footwear`,
+					text: `Barefoot shoes provide a more enjoyable and injury free running experience and the zero-drop, anatomic width, total flexibility, ultra-thin, puncture-resistant soles allow you to walk natural whereever you go. Harvard study says: Barefoot is best!`,
+				},
+				{
+					image: `/src/bg/viv_start_universal.png`,
+					title: `Live barefoot everyday and everywhere`,
+					text: `Perfect and even fashionable shoes for any terrain and any activity. Enjoy a healthy barefoot-lifestyle while setting trends with your footwear. There a casual styles, trainers, off road and hiking shoes and waterproof models for men, women and kids.`,
+				},
+				{
+					image: `/src/bg/viv_start_environment.png`,
+					title: `Help your body - help the environment`,
+					text: `VIVOBAREFOOT footwear is produced sustainably using recycled, locally sourced materials, with efficient and eco-friendly production techniques in independently monitored ethical factories. Many vegan styles available.`,
+				},
+			],
+			products: [
+				{
+					image: 'https://www.vivobarefoot.de/out/pictures/generated/product/2/665_665_75/sol_vb-200099-08-h_pic2_2.jpg',
+					name: 'Ababa Ladies Canvas Soul of Africa',
+					newPrice: 85.00,
+				},
+				{
+					image: 'https://www.vivobarefoot.de/out/pictures/generated/product/2/665_665_75/sol_vb-300041-16-h_pic2_2.jpg',
+					name: 'Gobi II Men Canvas Swimrun',
+					newPrice: 155.00,
+				},
+				{
+					image: 'https://www.vivobarefoot.de/out/pictures/generated/product/2/665_665_75/sol_vb-200097-04-h_pic2_2.jpg',
+					name: 'RIF Ladies ECO Suede',
+					newPrice: 135.01,
+					oldPrice: 101.26,
+				},
+				{
+					image: 'https://www.vivobarefoot.de/out/pictures/generated/product/2/665_665_75/sol_vb-300079-02-h_pic2_2.jpg',
+					name: 'Primus Lux Men',
+					newPrice: 165.01,
+				},
+				{
+					image: 'https://www.vivobarefoot.de/out/pictures/generated/product/2/665_665_75/sol_vb-300028-01-h_pic2_2.jpg',
+					name: 'Stealth Men II',
+					newPrice: 140.00,
+				},
+			],
+			textures: [
+				{
+					image: '/src/bg/viv_start_sole_casual.png',
+					name: 'Casual',
+				},
+				{
+					image: '/src/bg/viv_start_sole_running.png',
+					name: 'Rennen',
+				},
+				{
+					image: '/src/bg/viv_start_sole_offroad.png',
+					name: 'Offroad',
+				},
+				{
+					image: '/src/bg/viv_start_sole_winter.png',
+					name: 'Winter',
+				},
+				{
+					image: '/src/bg/viv_start_sole_motus.png',
+					name: 'Mulitterrain',
+				},
+				{
+					image: '/src/bg/viv_start_sole_kids.png',
+					name: 'Kinder',
+				},
+			],
+			boundaries: false,
+		},
+		methods: {
+			toggleBasketDropdown() {
+				this.basketDropdown = !this.basketDropdown
+				this.userDropdown = false
+			},
+			toggleUserDropdown() {
+				this.userDropdown = !this.userDropdown
+				this.basketDropdown = false
+			},
+			toggleUserSession() {
+				this.userSignin = !this.userSignin
+			},
+			toggleLanguageSelection() {
+				this.languageSelection = !this.languageSelection
+			},
+			toggleBoundaries() {
+				this.boundaries = !this.boundaries
+			},
+		},
+	})
+</script>
+</html>
